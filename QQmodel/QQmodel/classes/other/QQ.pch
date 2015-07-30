@@ -1,0 +1,20 @@
+//
+//  PrefixHeader.pch
+//  QQdamol
+//
+//  Created by 刘嘉欣 on 15/7/29.
+//  Copyright (c) 2015年 刘嘉欣. All rights reserved.
+//
+
+#ifndef QQdamol_PrefixHeader_pch
+#define QQdamol_PrefixHeader_pch
+
+#endif
+
+#ifdef __OBJC__
+
+#import "UIView+frame.h"
+#define ScreenBounds  [UIScreen mainScreen].bounds
+#define KeyWindow  [UIApplication sharedApplication].keyWindow
+
+#endif
