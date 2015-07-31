@@ -13,4 +13,9 @@
 @property(nonatomic,weak) UIImage *image;
 @property(nonatomic,copy) NSString *sign;
 + (instancetype)groupWithItems:(NSArray *)items;
+
+
+
+// 借用模型  用在了friend中
+@property(nonatomic,strong) UIView *headerView;
 @end

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		D66E9F791B6B28CA00925151 /* TabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D66E9F781B6B28CA00925151 /* TabBar.m */; };
+		D66E9F7D1B6B66B800925151 /* TabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = D66E9F7C1B6B66B800925151 /* TabBar.xib */; };
+		D66E9F801B6B675D00925151 /* TabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D66E9F7F1B6B675D00925151 /* TabBarButton.m */; };
+		D66E9F821B6B69E500925151 /* TabBarButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = D66E9F811B6B69E500925151 /* TabBarButton.xib */; };
 		D6EFFEC41B6A57AE003801BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6EFFEC31B6A57AE003801BD /* Images.xcassets */; };
 		D6EFFED31B6A57AE003801BD /* QQmodelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EFFED21B6A57AE003801BD /* QQmodelTests.m */; };
 		D6EFFF1D1B6A589F003801BD /* DynamicController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EFFEE01B6A589F003801BD /* DynamicController.m */; };
@@ -45,6 +48,10 @@
 /* Begin PBXFileReference section */
 		D66E9F771B6B28CA00925151 /* TabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBar.h; sourceTree = "<group>"; };
 		D66E9F781B6B28CA00925151 /* TabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBar.m; sourceTree = "<group>"; };
+		D66E9F7C1B6B66B800925151 /* TabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBar.xib; sourceTree = "<group>"; };
+		D66E9F7E1B6B675D00925151 /* TabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarButton.h; sourceTree = "<group>"; };
+		D66E9F7F1B6B675D00925151 /* TabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarButton.m; sourceTree = "<group>"; };
+		D66E9F811B6B69E500925151 /* TabBarButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarButton.xib; sourceTree = "<group>"; };
 		D6EFFEB31B6A57AE003801BD /* QQmodel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQmodel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6EFFEB71B6A57AE003801BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6EFFEC31B6A57AE003801BD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -348,7 +355,11 @@
 				D6EFFF001B6A589F003801BD /* Cover.h */,
 				D6EFFF011B6A589F003801BD /* Cover.m */,
 				D66E9F771B6B28CA00925151 /* TabBar.h */,
+				D66E9F7C1B6B66B800925151 /* TabBar.xib */,
 				D66E9F781B6B28CA00925151 /* TabBar.m */,
+				D66E9F7E1B6B675D00925151 /* TabBarButton.h */,
+				D66E9F811B6B69E500925151 /* TabBarButton.xib */,
+				D66E9F7F1B6B675D00925151 /* TabBarButton.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -570,8 +581,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6EFFF361B6A6EE4003801BD /* SideViewController.xib in Resources */,
+				D66E9F821B6B69E500925151 /* TabBarButton.xib in Resources */,
 				D6EFFEC41B6A57AE003801BD /* Images.xcassets in Resources */,
 				D6EFFF211B6A589F003801BD /* LoginController.xib in Resources */,
+				D66E9F7D1B6B66B800925151 /* TabBar.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +619,7 @@
 				D6EFFF311B6A6C8C003801BD /* SideCell.m in Sources */,
 				D6EFFF231B6A589F003801BD /* NavigationController.m in Sources */,
 				D6EFFF221B6A589F003801BD /* MainController.m in Sources */,
+				D66E9F801B6B675D00925151 /* TabBarButton.m in Sources */,
 				D6EFFF291B6A589F003801BD /* main.m in Sources */,
 				D6EFFF1E1B6A589F003801BD /* FriendController.m in Sources */,
 			);

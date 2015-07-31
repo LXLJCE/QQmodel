@@ -130,8 +130,7 @@
         
     }];
     UIViewController *Vc = [[item.vc alloc]init];
-    Vc.view.backgroundColor = [UIColor redColor];
-    
+    Vc.view.backgroundColor = [UIColor yellowColor];
     Vc.navigationItem.title = item.title;
     _selectVc = Vc;
     self.tabVc.selectedIndex = 0;

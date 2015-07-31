@@ -122,6 +122,17 @@
     
     
 }
+- (IBAction)clickSeting:(id)sender {
+    
+    SideItem *item = [[SideItem alloc]init];
+    item.vc = [UITableViewController class];
+    item.title = @"设置";
+    if ([self.delegate respondsToSelector:@selector(didSideView:)]) {
+        [self.delegate didSideView:item];
+    }
+    
+    
+}
 
 
 @end

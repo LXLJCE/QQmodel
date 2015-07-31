@@ -37,8 +37,11 @@
 //    
 //    [self addChildViewController:naVc];
     [self setAddOneChileController:mes image:[UIImage imageNamed:@"tab_recent_nor"] title:@"消息" badgeValue:@"99+"];
+    
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"tab_me_nor"] style:UIBarButtonItemStyleDone target:self action:nil];
+    [mes.navigationItem setLeftBarButtonItem:leftBarItem animated:YES];
     self.naVc = mes.navigationController;
-    FriendController *fri = [[FriendController alloc]init];
+    FriendController *fri = [[FriendController alloc]initWithStyle:UITableViewStyleGrouped];
     [self setAddOneChileController:fri image:[UIImage imageNamed:@"tab_buddy_nor"] title:@"好友" badgeValue:@"1"];
     
     DynamicController *dyn = [[DynamicController alloc]init];
@@ -52,8 +55,8 @@
 
     NavigationController *naVc = [[NavigationController alloc]initWithRootViewController:viewController];
     viewController.navigationItem.title = title;
-   
-    naVc.tabBarItem.image = image;
+  
+       naVc.tabBarItem.image = image;
     naVc.tabBarItem.title = title;
     naVc.tabBarItem.badgeValue = badgeValue;
     

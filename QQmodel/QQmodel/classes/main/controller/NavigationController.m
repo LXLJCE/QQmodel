@@ -27,13 +27,19 @@
     bar.titleTextAttributes = arrTitle;
     [bar setBackgroundImage:[UIImage imageNamed:@"NavBar64"] forBarMetrics:UIBarMetricsDefault];
     
+    
     UIBarButtonItem *barItem = [UIBarButtonItem appearanceWhenContainedIn:self,nil];
     [barItem setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault ];
+    
+    
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUp];
+    
+
 }
 - (void)setUp
 {

@@ -7,94 +7,142 @@
 //
 
 #import "FriendController.h"
-
+#import "SideItem.h"
+#import "SideGroupItem.h"
+#import "SideCell.h"
 @interface FriendController ()
-
+@property(nonatomic,strong) NSMutableArray *groups;
+@property(nonatomic,strong) SideGroupItem *group;
 @end
 
 @implementation FriendController
 
+- (NSMutableArray *)groups
+{
+    if (!_groups) {
+        _groups = [NSMutableArray array];
+    }
+    return _groups;
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setUp0];
+    [self setUp1];
+    // 用于隐藏导航条颜色。
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.tableView.sectionHeaderHeight = 44;
+    self.tableView.rowHeight = 44;
+
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (void)setUp0
+{
     
-    // Configure the cell...
+
+    SideItem *item0 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item1 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item2 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item3 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item4 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
     
+    SideGroupItem *group = [SideGroupItem groupWithItems:@[item0,item1,item2,item3,item4]];
+    
+    
+    self.group = group;
+    
+    [self.groups addObject:group];
+
+}
+- (void)setUp1
+{
+    
+    
+    SideItem *item0 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item1 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item2 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item3 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    SideItem *item4 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
+    
+    SideGroupItem *group = [SideGroupItem groupWithItems:@[item0,item1,item2,item3,item4]];
+    
+    group.headerView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"8"]];
+   
+    
+    
+    [self.groups addObject:group];
+    
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+
+    return self.groups.count;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+
+    SideGroupItem *group = self.groups[section];
+    
+    return group.items.count;
+
+
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    SideCell *cell = [SideCell cellWithTableView:tableView style:UITableViewCellStyleDefault];
+    SideGroupItem *group = self.groups[indexPath.section];
+    SideItem *item = group.items[indexPath.row];
+    cell.item = item;
     return cell;
+
+
 }
-*/
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSLog(@"%s",__func__);
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+  
+    SideGroupItem *group = self.groups[section];
+        return group.headerView;
+
 }
-*/
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+{
+    
+    SideGroupItem *group = self.groups[indexPath.section];
+    SideItem *item = group.items[indexPath.row];
+    
+    NSLog(@"%d",group.items.count);
+    
+    
+    if (indexPath.row == 0 && group.items.count == 1) {
+        
+        [self.groups removeObject:group];
+        
+        [self.groups insertObject:self.group atIndex:indexPath.section];
+        
+        NSLog(@"%@",self.group);
+        
+        [self.tableView reloadData];
+        
+        
+    }
+    
+
+    
+    else if (indexPath.row == 0) {
+        
+        SideGroupItem *newGroup = [SideGroupItem groupWithItems:@[item]];
+        [self.groups removeObject:group];
+        NSLog(@"%zd",indexPath.section);
+        [self.groups insertObject:newGroup atIndex:indexPath.section];
+        [self.tableView reloadData];
+        
+    }
+    
+    
+
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
