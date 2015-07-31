@@ -46,7 +46,7 @@
 
 - (void)pan:(UIPanGestureRecognizer *)pan
 {
-    if (self.tabVc.naVc.childViewControllers.count == 1) {
+
     
     CGPoint panP = [pan translationInView:self.tabVc.view];
     
@@ -79,7 +79,7 @@
             self.tabVc.view.frame = [self newViewFrame:offsetX];
         }];
         }
-    }
+
     
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
