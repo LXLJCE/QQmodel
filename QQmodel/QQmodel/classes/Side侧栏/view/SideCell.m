@@ -20,6 +20,8 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:15];
+    
 
     return cell;
 }

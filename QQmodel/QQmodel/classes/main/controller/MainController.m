@@ -78,12 +78,18 @@
         }else{
             offsetX = MaxX - self.tabVc.view.x;
             
-            
-        }
+            if (self.tabVc.naVc.childViewControllers.count == 1) {
+                UIViewController *vc = self.tabVc.naVc.childViewControllers[0];
+                vc.view.userInteractionEnabled = NO;
+            }
+           
+           }
         [UIView animateWithDuration:0.1 animations:^{
             self.tabVc.view.frame = [self newViewFrame:offsetX];
-        }];
-        }
+            }];
+
+        
+    }
 
     
 }
@@ -94,6 +100,7 @@
         self.tabVc.view.frame = [self newViewFrame:-ScreenBounds.size.width];
         
     }];
+   
     
 }
 

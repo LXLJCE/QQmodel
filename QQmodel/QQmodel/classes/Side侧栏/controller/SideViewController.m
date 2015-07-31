@@ -34,6 +34,7 @@
     
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = self.tableView.height / 7.0;
  
   
     
