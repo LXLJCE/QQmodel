@@ -29,9 +29,6 @@
     
     UIBarButtonItem *barItem = [UIBarButtonItem appearanceWhenContainedIn:self,nil];
     [barItem setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault ];
-    
-    
-
 }
 
 - (void)viewDidLoad {
@@ -63,9 +60,14 @@
     [self.view addGestureRecognizer:pan];
 
 }
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)pan
 {
+    
     // 只有非跟控制器才能拥有滑动返回功能 子控件数为1，因为根控制器也为其子控制器。所以为1时，就是只子控制器。
     return self.childViewControllers.count != 1;
 }
+
+
+
+
 @end

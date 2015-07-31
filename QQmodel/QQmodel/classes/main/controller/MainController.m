@@ -10,9 +10,10 @@
 #import "TabBarController.h"
 #import "SideViewController.h"
 #import "SideItem.h"
-@interface MainController ()<SideViewControllerDelegate>
+@interface MainController ()<SideViewControllerDelegate,NavigationControllerDelegate>
 @property(nonatomic,strong) TabBarController *tabVc;
 @property(nonatomic,strong) SideViewController *sideVc;
+@property( nonatomic,strong) UIViewController *selectVc;
 
 @end
 
@@ -34,6 +35,7 @@
     TabBarController *tabVc = [[TabBarController alloc]init];
 
     self.tabVc = tabVc;
+    tabVc.naVc.PopDelegate = self;
     [self.view addSubview:tabVc.view];
     
     
@@ -41,8 +43,11 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
     
     [self.tabVc.view addGestureRecognizer:pan];
+    
 
 }
+
+
 
 - (void)pan:(UIPanGestureRecognizer *)pan
 {
@@ -111,6 +116,8 @@
 
 - (void)didSideView:(SideItem *)item
 {
+    
+    [self.selectVc removeFromParentViewController];
   [UIView animateWithDuration:0.25 animations:^{
         self.tabVc.view.frame = [self newViewFrame:-ScreenBounds.size.width];
         
@@ -119,9 +126,19 @@
     Vc.view.backgroundColor = [UIColor redColor];
     
     Vc.navigationItem.title = item.title;
-    
-    
+    _selectVc = Vc;
+    self.tabVc.selectedIndex = 0;
     [self.tabVc.naVc pushViewController:Vc animated:YES];
+
+}
+
+#pragma mark - NavigationControllDelegate
+- (void)didClickBack
+{
+
+
+    self.tabVc.view.frame = [self newViewFrame:MaxX];
+
 
 }
 

@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NavigationControllerDelegate <NSObject>
+
+@optional
+
+- (void)didClickBack;
+
+
+@end
+
+
+
 @interface NavigationController : UINavigationController
+
+@property(nonatomic,weak) id PopDelegate;
 
 @end
