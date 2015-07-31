@@ -18,6 +18,7 @@
         cell = [[self  alloc]initWithStyle:style reuseIdentifier:ID];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.backgroundColor = [UIColor clearColor];
 
     return cell;
 }

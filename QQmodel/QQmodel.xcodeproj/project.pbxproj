@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D66E9F791B6B28CA00925151 /* TabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D66E9F781B6B28CA00925151 /* TabBar.m */; };
 		D6EFFEC41B6A57AE003801BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6EFFEC31B6A57AE003801BD /* Images.xcassets */; };
 		D6EFFED31B6A57AE003801BD /* QQmodelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EFFED21B6A57AE003801BD /* QQmodelTests.m */; };
 		D6EFFF1D1B6A589F003801BD /* DynamicController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EFFEE01B6A589F003801BD /* DynamicController.m */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D66E9F771B6B28CA00925151 /* TabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBar.h; sourceTree = "<group>"; };
+		D66E9F781B6B28CA00925151 /* TabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBar.m; sourceTree = "<group>"; };
 		D6EFFEB31B6A57AE003801BD /* QQmodel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQmodel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6EFFEB71B6A57AE003801BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6EFFEC31B6A57AE003801BD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 			children = (
 				D6EFFF001B6A589F003801BD /* Cover.h */,
 				D6EFFF011B6A589F003801BD /* Cover.m */,
+				D66E9F771B6B28CA00925151 /* TabBar.h */,
+				D66E9F781B6B28CA00925151 /* TabBar.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				D6EFFF351B6A6EE4003801BD /* SideViewController.m in Sources */,
 				D6EFFF251B6A589F003801BD /* Cover.m in Sources */,
 				D6EFFF2E1B6A5C48003801BD /* SideItem.m in Sources */,
+				D66E9F791B6B28CA00925151 /* TabBar.m in Sources */,
 				D6EFFF1F1B6A589F003801BD /* GuideController.m in Sources */,
 				D6EFFF201B6A589F003801BD /* LoginController.m in Sources */,
 				D6EFFF271B6A589F003801BD /* AppDelegate.m in Sources */,

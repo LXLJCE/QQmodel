@@ -37,14 +37,14 @@
 //    
 //    [self addChildViewController:naVc];
     [self setAddOneChileController:mes image:[UIImage imageNamed:@"tab_recent_nor"] title:@"消息" badgeValue:@"99+"];
-    
+    self.naVc = mes.navigationController;
     FriendController *fri = [[FriendController alloc]init];
-    [self addChildViewController:fri];
+    [self setAddOneChileController:fri image:[UIImage imageNamed:@"tab_buddy_nor"] title:@"好友" badgeValue:@"1"];
     
     DynamicController *dyn = [[DynamicController alloc]init];
-    [self addChildViewController:dyn];
+    [self setAddOneChileController:dyn image:[UIImage imageNamed:@"tab_qworld_nor"] title:@"动态" badgeValue:@"2"];
    
-    
+   
 }
 
 - (void)setAddOneChileController:(UIViewController *)viewController image:(UIImage *)image title:(NSString *)title badgeValue:(NSString *)badgeValue
@@ -52,14 +52,12 @@
 
     NavigationController *naVc = [[NavigationController alloc]initWithRootViewController:viewController];
     viewController.navigationItem.title = title;
-    self.naVc = naVc;
+   
     naVc.tabBarItem.image = image;
     naVc.tabBarItem.title = title;
     naVc.tabBarItem.badgeValue = badgeValue;
     
     [self addChildViewController:naVc];
 }
-
-
 
 @end
