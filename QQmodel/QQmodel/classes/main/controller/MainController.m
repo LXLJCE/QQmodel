@@ -8,15 +8,16 @@
 
 #import "MainController.h"
 #import "TabBarController.h"
-#import "SideController.h"
-@interface MainController ()
+#import "SideViewController.h"
+#import "SideItem.h"
+@interface MainController ()<SideViewControllerDelegate>
 @property(nonatomic,strong) TabBarController *tabVc;
-@property(nonatomic,strong) SideController *sideVc;
+@property(nonatomic,strong) SideViewController *sideVc;
 
 @end
 
 @implementation MainController
-#define MaxX 250
+#define MaxX 300
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUp];
@@ -24,13 +25,14 @@
 }
 - (void)setUp
 {
-    
-    SideController *sideVc = [[SideController alloc]initWithStyle:UITableViewStylePlain];
+    SideViewController *sideVc = [[SideViewController alloc]init];
     self.sideVc = sideVc;
+    sideVc.delegate = self;
     [self.view addSubview:sideVc.view];
     
     
     TabBarController *tabVc = [[TabBarController alloc]init];
+
     self.tabVc = tabVc;
     [self.view addSubview:tabVc.view];
     
@@ -44,11 +46,17 @@
 
 - (void)pan:(UIPanGestureRecognizer *)pan
 {
+    if (self.tabVc.naVc.childViewControllers.count == 1) {
+    
     CGPoint panP = [pan translationInView:self.tabVc.view];
     
     CGFloat offsetX = panP.x;
-    if (panP.x > 0 || self.tabVc.view.x > 0) {
+    if (panP.x > 0 || self.tabVc.view.x > 0 ) {
+        
+        
         self.tabVc.view.frame = [self newViewFrame:offsetX];
+        
+        
     }
     
     
@@ -71,7 +79,7 @@
             self.tabVc.view.frame = [self newViewFrame:offsetX];
         }];
         }
-    
+    }
     
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -99,4 +107,22 @@
     
     
 }
+#pragma mark -- SideViewControllerDelegate
+
+- (void)didSideView:(SideItem *)item
+{
+  [UIView animateWithDuration:0.25 animations:^{
+        self.tabVc.view.frame = [self newViewFrame:-ScreenBounds.size.width];
+        
+    }];
+    UIViewController *Vc = [[item.vc alloc]init];
+    Vc.view.backgroundColor = [UIColor redColor];
+    
+    Vc.navigationItem.title = item.title;
+    
+    
+    [self.tabVc.naVc pushViewController:Vc animated:YES];
+
+}
+
 @end

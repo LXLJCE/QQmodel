@@ -14,6 +14,7 @@
 #ifdef __OBJC__
 
 #import "UIView+frame.h"
+#import "UIImage+Image.h"
 #define ScreenBounds  [UIScreen mainScreen].bounds
 #define KeyWindow  [UIApplication sharedApplication].keyWindow
 
