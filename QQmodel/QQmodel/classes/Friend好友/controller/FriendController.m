@@ -12,10 +12,19 @@
 #import "SideCell.h"
 @interface FriendController ()
 @property(nonatomic,strong) NSMutableArray *groups;
-@property(nonatomic,strong) SideGroupItem *group;
+@property(nonatomic,strong) NSMutableArray *flagArray;
 @end
 
 @implementation FriendController
+
+-  (NSMutableArray *)flagArray
+{
+    if (!_flagArray) {
+        _flagArray = [NSMutableArray array];
+    }
+    return _flagArray;
+
+}
 
 - (NSMutableArray *)groups
 {
@@ -32,10 +41,15 @@
     // 用于隐藏导航条颜色。
 //    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
 //    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    self.tableView.sectionHeaderHeight = 44;
-    self.tableView.rowHeight = 44;
+  
+    
+    for (int i = 0; i < self.groups.count; i++) {
+        [self.flagArray addObject:@1];
+    }
 
 }
+
+
 - (void)setUp0
 {
     
@@ -47,9 +61,6 @@
     SideItem *item4 = [SideItem sideItemWithTitle:@"abc" andImage:nil];
     
     SideGroupItem *group = [SideGroupItem groupWithItems:@[item0,item1,item2,item3,item4]];
-    
-    
-    self.group = group;
     
     [self.groups addObject:group];
 
@@ -73,18 +84,32 @@
     [self.groups addObject:group];
     
 }
+- (int)numberCountOfSection:(NSInteger)section
+{
+    int num = [[self.flagArray objectAtIndex:section] intValue];
+    if (num == 1) {
+        return 0;
+    }else
+    {
+        SideGroupItem *group = self.groups[section];
+        return group.items.count;
+    
+    }
+    
+    return 0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 
     return self.groups.count;
+   
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    SideGroupItem *group = self.groups[section];
-    
-    return group.items.count;
-
+    return [self numberCountOfSection:section];
+   
 
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,51 +123,69 @@
 
 
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    NSLog(@"%s",__func__);
-
-  
-    SideGroupItem *group = self.groups[section];
-        return group.headerView;
-
+//段头返回一个view，添加点击按钮
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    NSLog(@"%zd",section);
+    UIView *headerView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 35)];
+    headerView.backgroundColor=[UIColor clearColor];
+    headerView.alpha=0.9;
+//    [headerView setTag:[[NSString stringWithFormat:@"%ld1",(long)section] intValue]];
+    //底图
+//    UIImageView *img=[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 35)];
+//    img.image=[UIImage imageNamed:@"header.png"];
+//    [img setTag:[[NSString stringWithFormat:@"%ld2",(long)section] intValue]];
+//    img.backgroundColor=[UIColor clearColor];
+    //按钮
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setFrame:CGRectMake(0, 0, 375, 35)];
+//    [btn setBackgroundColor:[UIColor clearColor]];
+    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setTag:[[NSString stringWithFormat:@"%ld",(long)section] intValue]];
+//    NSLog(@"%zd",btn.tag);
+    
+    //上下的标志图片
+    UIImageView *UDImg=[[UIImageView alloc] initWithFrame:CGRectMake(10,10, 20, 20)];
+    int flagNum=[[self.flagArray objectAtIndex:section] intValue];
+    if (flagNum==1) {
+        UDImg.image=[UIImage imageNamed:@"list_ico.png"];
+    }else {
+        UDImg.image=[UIImage imageNamed:@"list_ico_d.png"];
+    }
+//    [UDImg setTag:[[NSString stringWithFormat:@"%ld3",(long)section] intValue]];
+//    UDImg.backgroundColor=[UIColor clearColor];
+    
+//    [headerView addSubview:img];
+    [headerView addSubview:btn];
+    [headerView addSubview:UDImg];
+    
+    return headerView;
+    
+    
+    
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//段头按钮点击响应事件
+-(void)btnClick:(id)sender{
+    UIButton *btn=(UIButton *)sender;
+    int tag=(int)btn.tag;
+    int flagNum=[[self.flagArray objectAtIndex:tag] intValue];
+    NSLog(@"%zd",flagNum);
+    
+    if (flagNum==1) {
+        [self.flagArray replaceObjectAtIndex:tag withObject:@0];
+    }else {
+        [self.flagArray replaceObjectAtIndex:tag withObject:@1];
+    }
+    
+    [self.tableView reloadData];
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    
-    SideGroupItem *group = self.groups[indexPath.section];
-    SideItem *item = group.items[indexPath.row];
-    
-    NSLog(@"%d",group.items.count);
-    
-    
-    if (indexPath.row == 0 && group.items.count == 1) {
-        
-        [self.groups removeObject:group];
-        
-        [self.groups insertObject:self.group atIndex:indexPath.section];
-        
-        NSLog(@"%@",self.group);
-        
-        [self.tableView reloadData];
-        
-        
-    }
-    
-
-    
-    else if (indexPath.row == 0) {
-        
-        SideGroupItem *newGroup = [SideGroupItem groupWithItems:@[item]];
-        [self.groups removeObject:group];
-        NSLog(@"%zd",indexPath.section);
-        [self.groups insertObject:newGroup atIndex:indexPath.section];
-        [self.tableView reloadData];
-        
-    }
-    
-    
-
+    return 35;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 30;
 }
 @end
